@@ -1,0 +1,247 @@
+{
+  "patients": [
+    {
+      "uhid": "MG25001",
+      "name": "Rajesh Menon",
+      "age": 62,
+      "gender": "male",
+      "summary": "Type 2 diabetes with chronic kidney disease stage G3b and hypertension.",
+      "reports": [
+        {
+          "file": "endocrinology_consultation_2025-09-15.pdf",
+          "name": "Endocrinology Consultation - Sep 2025",
+          "category": "consultation",
+          "notes": "Baseline diabetes and kidney review with medication list.",
+          "date": "2025-09-15"
+        },
+        {
+          "file": "lab_report_2026-01-14.pdf",
+          "name": "Biochemistry and Haematology - Jan 2026",
+          "category": "lab",
+          "notes": "Fasting panel: glycaemic control, lipids, renal function and blood count.",
+          "date": "2026-01-14"
+        },
+        {
+          "file": "prescription_2026-03-02.pdf",
+          "name": "Prescription - Mar 2026",
+          "category": "prescription",
+          "notes": "Medication changes after the January kidney function result.",
+          "date": "2026-03-02"
+        },
+        {
+          "file": "lab_report_2026-06-10_preliminary.pdf",
+          "name": "Biochemistry - Jun 2026 (preliminary)",
+          "category": "lab",
+          "notes": "Preliminary biochemistry result; superseded by the corrected report.",
+          "date": "2026-06-10"
+        },
+        {
+          "file": "lab_report_2026-06-10_corrected.pdf",
+          "name": "Biochemistry - Jun 2026 (corrected)",
+          "category": "lab",
+          "notes": "Corrected report; replaces the preliminary biochemistry result of 10 Jun 2026.",
+          "date": "2026-06-11"
+        }
+      ]
+    },
+    {
+      "uhid": "MG25002",
+      "name": "Meera Iyer",
+      "age": 71,
+      "gender": "female",
+      "summary": "Paroxysmal atrial fibrillation and hypertension on a direct oral anticoagulant.",
+      "reports": [
+        {
+          "file": "cardiology_consultation_2025-10-08.pdf",
+          "name": "Cardiology Consultation - Oct 2025",
+          "category": "consultation",
+          "notes": "Paroxysmal atrial fibrillation and hypertension review; anticoagulation plan.",
+          "date": "2025-10-08"
+        },
+        {
+          "file": "lab_report_2026-02-19.pdf",
+          "name": "Blood Count and Renal Function - Feb 2026",
+          "category": "lab",
+          "notes": "Annual blood count, renal function, electrolytes and thyroid function.",
+          "date": "2026-02-19"
+        },
+        {
+          "file": "prescription_2026-02-26.pdf",
+          "name": "Prescription - Feb 2026",
+          "category": "prescription",
+          "notes": "Updated cardiac medication list with anticoagulant dose adjustment.",
+          "date": "2026-02-26"
+        },
+        {
+          "file": "discharge_summary_2026-07-22.pdf",
+          "name": "Discharge Summary - Jul 2026",
+          "category": "discharge",
+          "notes": "Admission for atrial fibrillation with rapid ventricular response.",
+          "date": "2026-07-22"
+        }
+      ]
+    },
+    {
+      "uhid": "MG25003",
+      "name": "Daniel Okafor",
+      "age": 58,
+      "gender": "male",
+      "summary": "COPD (GOLD grade 2, formerly labelled asthma); ex-smoker, recent exacerbation.",
+      "reports": [
+        {
+          "file": "pulmonology_consultation_2025-11-04.pdf",
+          "name": "Pulmonology Consultation - Nov 2025",
+          "category": "consultation",
+          "notes": "COPD assessment with spirometry and inhaler regimen.",
+          "date": "2025-11-04"
+        },
+        {
+          "file": "chest_xray_report_2026-05-12.pdf",
+          "name": "Chest X-ray - May 2026",
+          "category": "imaging",
+          "notes": "PA and lateral chest radiograph.",
+          "date": "2026-05-12"
+        },
+        {
+          "file": "prescription_2026-05-20.pdf",
+          "name": "Prescription - May 2026",
+          "category": "prescription",
+          "notes": "Inhaled therapy escalated after review of symptoms.",
+          "date": "2026-05-20"
+        },
+        {
+          "file": "discharge_summary_2026-08-30.pdf",
+          "name": "Discharge Summary - Aug 2026",
+          "category": "discharge",
+          "notes": "Admission for an acute exacerbation of COPD.",
+          "date": "2026-08-30"
+        }
+      ]
+    },
+    {
+      "uhid": "MG25004",
+      "name": "Priya Nair",
+      "age": 67,
+      "gender": "female",
+      "summary": "Right total knee replacement for osteoarthritis, six weeks into rehabilitation.",
+      "reports": [
+        {
+          "file": "knee_xray_report_2026-03-20.pdf",
+          "name": "Right Knee X-ray - Mar 2026",
+          "category": "imaging",
+          "notes": "Pre-operative weight-bearing radiographs of both knees.",
+          "date": "2026-03-20"
+        },
+        {
+          "file": "post_op_xray_report_2026-04-07.pdf",
+          "name": "Post-operative Knee X-ray - Apr 2026",
+          "category": "imaging",
+          "notes": "Right knee radiographs on the first day after total knee replacement.",
+          "date": "2026-04-07"
+        },
+        {
+          "file": "discharge_summary_2026-04-10.pdf",
+          "name": "Discharge Summary - Apr 2026",
+          "category": "discharge",
+          "notes": "Right total knee replacement; recovery and discharge medication.",
+          "date": "2026-04-10"
+        },
+        {
+          "file": "orthopaedic_followup_2026-05-18.pdf",
+          "name": "Orthopaedic Follow-up - May 2026",
+          "category": "consultation",
+          "notes": "Six-week review after total knee replacement with range-of-movement progress.",
+          "date": "2026-05-18"
+        }
+      ]
+    },
+    {
+      "uhid": "MG25005",
+      "name": "Hannah Brooks",
+      "age": 31,
+      "gender": "female",
+      "summary": "Second pregnancy with gestational diabetes and iron deficiency, due January 2027.",
+      "reports": [
+        {
+          "file": "antenatal_booking_visit_2026-06-02.pdf",
+          "name": "Antenatal Booking Visit - Jun 2026",
+          "category": "consultation",
+          "notes": "Booking history, risk assessment and antenatal plan.",
+          "date": "2026-06-02"
+        },
+        {
+          "file": "lab_report_2026-06-02.pdf",
+          "name": "Antenatal Booking Bloods - Jun 2026",
+          "category": "lab",
+          "notes": "Booking blood tests: blood count, ferritin, blood group, infection screen, HbA1c.",
+          "date": "2026-06-02"
+        },
+        {
+          "file": "lab_report_2026-09-16.pdf",
+          "name": "Glucose Tolerance Test and Iron Studies - Sep 2026",
+          "category": "lab",
+          "notes": "75 g OGTT at 24 weeks with repeat blood count and ferritin.",
+          "date": "2026-09-16"
+        },
+        {
+          "file": "obstetric_ultrasound_report_2026-10-13.pdf",
+          "name": "Obstetric Growth Scan - Oct 2026",
+          "category": "imaging",
+          "notes": "Third-trimester growth scan with biometry, liquor volume and placental position.",
+          "date": "2026-10-13"
+        },
+        {
+          "file": "antenatal_consultation_2026-10-27.pdf",
+          "name": "Antenatal Review - Oct 2026",
+          "category": "consultation",
+          "notes": "Gestational diabetes and iron deficiency follow-up with current medication.",
+          "date": "2026-10-27"
+        }
+      ]
+    },
+    {
+      "uhid": "MG25006",
+      "name": "Thomas Whitfield",
+      "age": 49,
+      "gender": "male",
+      "summary": "Stage III sigmoid colon cancer; adjuvant CAPOX completed, now on surveillance.",
+      "reports": [
+        {
+          "file": "oncology_consultation_2026-03-12.pdf",
+          "name": "Oncology Consultation - Mar 2026",
+          "category": "consultation",
+          "notes": "Post-operative staging and adjuvant chemotherapy plan for colon cancer.",
+          "date": "2026-03-12"
+        },
+        {
+          "file": "lab_report_2026-05-05.pdf",
+          "name": "Pre-chemotherapy Bloods - May 2026",
+          "category": "lab",
+          "notes": "Blood count, liver and renal function and CEA before cycle 3.",
+          "date": "2026-05-05"
+        },
+        {
+          "file": "lab_report_2026-09-21.pdf",
+          "name": "End-of-treatment Bloods - Sep 2026",
+          "category": "lab",
+          "notes": "Blood count, liver and renal function and CEA three weeks after the final cycle.",
+          "date": "2026-09-21"
+        },
+        {
+          "file": "ct_chest_abdomen_pelvis_2026-09-23.pdf",
+          "name": "CT Chest, Abdomen and Pelvis - Sep 2026",
+          "category": "imaging",
+          "notes": "End-of-treatment staging CT compared with the pre-operative scan.",
+          "date": "2026-09-23"
+        },
+        {
+          "file": "oncology_followup_2026-10-06.pdf",
+          "name": "Oncology Follow-up - Oct 2026",
+          "category": "consultation",
+          "notes": "Review after completing adjuvant chemotherapy, with surveillance plan.",
+          "date": "2026-10-06"
+        }
+      ]
+    }
+  ]
+}

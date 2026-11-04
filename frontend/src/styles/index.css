@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens are HSL triples so Tailwind can apply alpha (`bg-primary/10`).
+ * Every foreground/background pairing below meets WCAG AA in its own theme.
+ */
+:root {
+  --background: 210 25% 97%;
+  --surface: 0 0% 100%;
+  --subtle: 210 20% 95%;
+  --border: 214 20% 87%;
+  --foreground: 215 28% 13%;
+  --muted: 215 14% 36%;
+  --primary: 192 82% 31%;
+  --primary-foreground: 0 0% 100%;
+  --primary-soft: 190 55% 93%;
+  --primary-text: 192 85% 23%;
+  --success: 162 90% 20%;
+  --success-soft: 152 55% 92%;
+  --warning: 28 95% 27%;
+  --warning-soft: 40 95% 90%;
+  --danger: 0 70% 40%;
+  --danger-soft: 0 85% 96%;
+  --cite: 192 65% 91%;
+  --cite-foreground: 192 85% 22%;
+  --ring: 192 82% 38%;
+  --shadow: 215 40% 10%;
+  color-scheme: light;
+}
+
+.dark {
+  --background: 218 30% 7%;
+  --surface: 218 24% 10.5%;
+  --subtle: 218 20% 15%;
+  --border: 218 16% 22%;
+  --foreground: 210 20% 93%;
+  --muted: 215 14% 68%;
+  --primary: 188 72% 44%;
+  --primary-foreground: 218 40% 8%;
+  --primary-soft: 190 50% 16%;
+  --primary-text: 188 80% 72%;
+  --success: 152 60% 62%;
+  --success-soft: 152 40% 14%;
+  --warning: 38 90% 65%;
+  --warning-soft: 38 50% 14%;
+  --danger: 0 85% 72%;
+  --danger-soft: 0 45% 15%;
+  --cite: 190 60% 20%;
+  --cite-foreground: 188 85% 78%;
+  --ring: 188 80% 58%;
+  --shadow: 0 0% 0%;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background font-sans text-sm text-foreground antialiased;
+    font-feature-settings:
+      'cv11' 1,
+      'ss03' 1;
+    overflow-wrap: anywhere;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-surface;
+  }
+
+  ::selection {
+    @apply bg-primary/25;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+}
+
+@layer components {
+  /* Rendered assistant answers: compact typography for prose, lists and GFM tables. */
+  .markdown {
+    @apply text-[15px] leading-relaxed;
+  }
+  .markdown > * + * {
+    @apply mt-3;
+  }
+  .markdown ul {
+    @apply list-disc space-y-1 pl-5;
+  }
+  .markdown ol {
+    @apply list-decimal space-y-1 pl-5;
+  }
+  .markdown li::marker {
+    @apply text-muted;
+  }
+  .markdown strong {
+    @apply font-semibold;
+  }
+  .markdown h1,
+  .markdown h2,
+  .markdown h3,
+  .markdown h4 {
+    @apply mt-4 font-semibold leading-snug;
+  }
+  .markdown h1,
+  .markdown h2 {
+    @apply text-base;
+  }
+  .markdown code {
+    @apply rounded bg-subtle px-1 py-0.5 font-mono text-[13px];
+  }
+  .markdown blockquote {
+    @apply border-l-2 border-border pl-3 text-muted;
+  }
+  .markdown a:not([data-citation]) {
+    @apply text-primary-text underline underline-offset-2;
+  }
+  .markdown .table-wrap {
+    @apply max-w-full overflow-x-auto rounded-md border border-border;
+  }
+  .markdown table {
+    @apply w-full border-collapse text-left text-[13px] tabular-nums;
+  }
+  .markdown th {
+    @apply whitespace-nowrap bg-subtle px-3 py-2 font-semibold;
+  }
+  .markdown td {
+    @apply border-t border-border px-3 py-2 align-top;
+  }
+}
+
+/* Best-effort highlight of the cited passage on the PDF text layer. */
+.pdf-highlight {
+  background-color: hsl(48 100% 55% / 0.45);
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
