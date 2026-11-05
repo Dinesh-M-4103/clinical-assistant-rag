@@ -97,7 +97,9 @@ function PdfBody({ target }: { target: PdfTarget }) {
       className="flex min-h-0 flex-1 flex-col focus:outline-none focus-visible:ring-0"
     >
       <DialogHeader className="pb-3">
-        <DialogTitle className="truncate">{target.reportName}</DialogTitle>
+        <DialogTitle className="truncate" title={target.reportName}>
+          {target.reportName}
+        </DialogTitle>
         <DialogDescription>
           {target.highlight
             ? 'The cited passage is highlighted where it can be located.'

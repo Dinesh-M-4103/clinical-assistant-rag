@@ -13,7 +13,8 @@
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.node.json",
     "test": "vitest run",
     "test:e2e": "playwright test --project=e2e",
-    "screenshots": "playwright test --project=screenshots"
+    "screenshots": "playwright test -c playwright.real.config.ts --project=screenshots",
+    "test:e2e:real": "playwright test -c playwright.real.config.ts --project=critical-path"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

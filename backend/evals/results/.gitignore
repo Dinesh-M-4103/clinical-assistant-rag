@@ -1,0 +1,4 @@
+# Per-run output; only the final results are committed.
+*
+!.gitignore
+!latest.json

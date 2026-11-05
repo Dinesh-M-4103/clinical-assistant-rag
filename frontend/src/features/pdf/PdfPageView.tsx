@@ -13,6 +13,16 @@ const TEXT_ITEM_SELECTOR = '.react-pdf__Page__textContent span[role="presentatio
 const PAGE_PADDING_PX = 32;
 const MIN_PAGE_WIDTH_PX = 200;
 
+/**
+ * Scrolls only the viewer container. `scrollIntoView` would also scroll the page and text-layer
+ * boxes (both clip their overflow), which shifts the text layer away from the canvas.
+ */
+function centreInView(container: HTMLElement, target: HTMLElement) {
+  const area = container.getBoundingClientRect();
+  const box = target.getBoundingClientRect();
+  container.scrollTop += box.top - area.top - (area.height - box.height) / 2;
+}
+
 interface PdfPageViewProps {
   file: Blob;
   page: number;
@@ -37,7 +47,7 @@ export function PdfPageView({ file, page, scale, highlight, onLoaded }: PdfPageV
     );
     spans.forEach((span, index) => span.classList.toggle('pdf-highlight', hits.has(index)));
     const first = spans[Math.min(...hits)];
-    first?.scrollIntoView({ block: 'center', inline: 'nearest' });
+    if (first) centreInView(container, first);
   }, [highlight]);
 
   return (
