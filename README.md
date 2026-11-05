@@ -37,30 +37,33 @@ A local-first RAG application: a clinician selects a patient, uploads that patie
 
 ## Architecture
 
+**Ingestion** (runs once, when a PDF is uploaded):
+
 ```mermaid
 flowchart LR
-    subgraph Ingest["Ingestion (on upload)"]
-        A[PDF] --> B[Text extraction<br/>PyMuPDF + cleanup]
-        B --> C[Section / sentence-aware<br/>chunking]
-        C --> D[Local embeddings<br/>bge-small-en-v1.5]
-        D --> E[(ChromaDB<br/>one collection per patient)]
-    end
+    A["PDF upload"] --> B["Text extraction<br/>PyMuPDF + cleanup"]
+    B --> C["Section- and sentence-aware<br/>chunking"]
+    C --> D["Local embeddings<br/>bge-small-en-v1.5"]
+    D --> E[("ChromaDB<br/>one collection per patient")]
+    C --> F["BM25 index<br/>per patient"]
+```
 
-    subgraph Query["Question answering"]
-        Q[Question + chat history] --> R[Rewrite follow-ups<br/>to standalone query]
-        R --> S1[Dense search]
-        R --> S2[BM25 search]
-        E -.-> S1
-        E -.-> S2
-        S1 --> F[Reciprocal Rank Fusion]
-        S2 --> F
-        F --> G[Cross-encoder rerank]
-        G --> H{Relevant<br/>enough?}
-        H -- no --> N[“Not found in records”]
-        H -- yes --> L[Gemini: grounded answer<br/>with citations]
-        L --> V[Validate citations]
-        V --> U[Streamed answer + evidence + trace]
-    end
+**Question answering** (runs for every question):
+
+```mermaid
+flowchart TB
+    Q["Question + chat history"] --> R["Rewrite follow-ups<br/>into a standalone query"]
+    R --> S1["Dense search<br/>(ChromaDB)"]
+    R --> S2["BM25 keyword search"]
+    S1 --> F["Reciprocal Rank Fusion"]
+    S2 --> F
+    F --> G["Cross-encoder rerank"]
+    G --> H{"Relevant<br/>enough?"}
+    H -- "no" --> N["Answer: not found in records<br/>(no LLM call)"]
+    H -- "yes" --> L["Gemini: grounded answer<br/>with [C1] citations"]
+    L --> V["Validate citations<br/>against retrieved chunks"]
+    V --> U["Streamed answer + evidence + trace"]
+    N --> U
 ```
 
 | Layer | Tech |
