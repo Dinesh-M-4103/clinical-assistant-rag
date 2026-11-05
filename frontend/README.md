@@ -17,14 +17,19 @@ npm run dev          # http://localhost:5173, API at VITE_API_BASE_URL (default 
 npm run dev:mock     # same UI against in-browser MSW mocks, no backend needed
 ```
 
-| Script                | What it does                                                          |
-| --------------------- | --------------------------------------------------------------------- |
-| `npm run build`       | Type-check and produce a production bundle in `dist/`                 |
-| `npm run lint`        | ESLint (typescript-eslint, react-hooks)                               |
-| `npm run typecheck`   | `tsc` for the app and for the config/e2e files                        |
-| `npm test`            | Vitest + Testing Library, API mocked with MSW                         |
-| `npm run test:e2e`    | Playwright flows and axe accessibility scans (starts the mock server) |
-| `npm run screenshots` | Captures key screens at 4 viewport sizes in light and dark            |
+| Script                  | What it does                                                                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run build`         | Type-check and produce a production bundle in `dist/`                                                                            |
+| `npm run lint`          | ESLint (typescript-eslint, react-hooks)                                                                                          |
+| `npm run typecheck`     | `tsc` for the app and for the config/e2e files                                                                                   |
+| `npm test`              | Vitest + Testing Library, API mocked with MSW                                                                                    |
+| `npm run test:e2e`      | Playwright flows and axe accessibility scans (starts the mock server)                                                            |
+| `npm run test:e2e:real` | Critical path against the real backend: add patient, upload, ask, open the cited page, delete (one live LLM call)                |
+| `npm run screenshots`   | Real-backend screenshots at 4 viewport sizes, light and dark, into `docs/screenshots/` (replays a recorded answer, no LLM calls) |
+
+The two real-backend suites need the API running with the demo data (`backend/scripts/seed_demo.py`)
+and `npm run dev`. Point them elsewhere with `E2E_BASE_URL` and `E2E_API_URL`; they skip themselves
+when no backend answers.
 
 Playwright browsers are installed inside the repo:
 `PLAYWRIGHT_BROWSERS_PATH=./.playwright npx playwright install chromium`.

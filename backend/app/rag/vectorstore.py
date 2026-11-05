@@ -97,9 +97,18 @@ class ChromaVectorStore:
         return _to_chunks(result["ids"], result["documents"] or [], result["metadatas"] or [])
 
     def delete_report(self, patient_id: str, report_id: str) -> None:
+        """Remove one report's chunks; a no-op when there are none.
+
+        Ids are looked up first and deleted explicitly. Calling ``delete(where=...)`` that
+        matches nothing - which every first ingest of a report does - intermittently left
+        the collection's HNSW index unreadable ("Nothing found on disk") in Chroma 1.5.
+        """
         collection = self._existing(patient_id)
-        if collection is not None:
-            collection.delete(where={"report_id": report_id})
+        if collection is None:
+            return
+        ids = collection.get(where={"report_id": report_id}, include=[])["ids"]
+        if ids:
+            collection.delete(ids=ids)
 
     def delete_patient(self, patient_id: str) -> None:
         if self._existing(patient_id) is not None:

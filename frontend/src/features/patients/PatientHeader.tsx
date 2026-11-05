@@ -52,7 +52,10 @@ export function PatientHeader({ patient }: { patient: Patient }) {
       <div className="mx-auto flex w-full max-w-3xl items-start gap-3 md:gap-4">
         <PatientAvatar name={patient.name} className="size-11 max-sm:hidden" />
         <div className="min-w-0 flex-1">
-          <h1 className="truncate text-base font-semibold leading-tight md:text-lg">
+          <h1
+            className="truncate text-base font-semibold leading-tight md:text-lg"
+            title={patient.name}
+          >
             {patient.name}
           </h1>
           <div className="mt-1.5 flex flex-wrap items-center gap-1.5">

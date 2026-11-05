@@ -25,13 +25,22 @@ export function MessageList({ uhid, messages }: MessageListProps) {
   const setActive = useChatStore((state) => state.setActive);
   const openInspector = useWorkspace((state) => state.openInspector);
 
-  const show = useCallback(
-    (id: string, tab: 'evidence' | 'trace') => {
+  // Stable handlers keep settled messages from re-rendering on every streamed token.
+  const showSources = useCallback(
+    (id: string) => {
       setActive(uhid, id);
-      openInspector(tab);
+      openInspector('evidence');
     },
     [uhid, setActive, openInspector],
   );
+  const showTrace = useCallback(
+    (id: string) => {
+      setActive(uhid, id);
+      openInspector('trace');
+    },
+    [uhid, setActive, openInspector],
+  );
+  const regenerate = useCallback((id: string) => void retryAnswer(uhid, id), [uhid]);
 
   const lastId = messages[messages.length - 1]?.id;
   const streaming = messages.some((message) => message.status === 'streaming');
@@ -49,9 +58,9 @@ export function MessageList({ uhid, messages }: MessageListProps) {
                 message={message}
                 isLast={message.id === lastId}
                 onOpenCitation={openCitation}
-                onRegenerate={() => void retryAnswer(uhid, message.id)}
-                onShowSources={() => show(message.id, 'evidence')}
-                onShowTrace={() => show(message.id, 'trace')}
+                onRegenerate={regenerate}
+                onShowSources={showSources}
+                onShowTrace={showTrace}
               />
             ),
           )}

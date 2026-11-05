@@ -3,6 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
 import type { ComponentPropsWithoutRef, HTMLAttributes } from 'react';
 import { cn } from '@/lib/cn';
+import { restoreOpener } from '@/lib/focus';
 
 export const Dialog = DialogPrimitive.Root;
 export const DialogTrigger = DialogPrimitive.Trigger;
@@ -50,6 +51,7 @@ export function DialogContent({
   children,
   placement,
   hideClose = false,
+  onCloseAutoFocus,
   ...props
 }: DialogContentProps) {
   return (
@@ -57,6 +59,10 @@ export function DialogContent({
       <DialogPrimitive.Overlay className={overlayVariants({ placement })}>
         <DialogPrimitive.Content
           className={cn(contentVariants({ placement }), className)}
+          onCloseAutoFocus={(event) => {
+            onCloseAutoFocus?.(event);
+            if (!event.defaultPrevented) restoreOpener(event);
+          }}
           {...props}
         >
           {children}

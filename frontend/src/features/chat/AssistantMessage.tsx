@@ -12,9 +12,10 @@ interface AssistantMessageProps {
   message: ChatMessage;
   isLast: boolean;
   onOpenCitation: (citation: Citation) => void;
-  onRegenerate: () => void;
-  onShowSources: () => void;
-  onShowTrace: () => void;
+  /** Handlers take the message id so the parent can pass the same functions to every message. */
+  onRegenerate: (id: string) => void;
+  onShowSources: (id: string) => void;
+  onShowTrace: (id: string) => void;
 }
 
 function typingLabel(message: ChatMessage): string {
@@ -33,6 +34,7 @@ export const AssistantMessage = memo(function AssistantMessage({
   const streaming = status === 'streaming';
   const settled = status === 'done';
   const citedCount = citations.filter((citation) => citation.cited).length;
+  const regenerate = () => onRegenerate(message.id);
 
   return (
     <article aria-label="Assistant answer" className="flex gap-3">
@@ -55,7 +57,7 @@ export const AssistantMessage = memo(function AssistantMessage({
         {status === 'stopped' && (
           <div className="flex flex-wrap items-center gap-2">
             <Badge>Stopped</Badge>
-            <Button variant="secondary" size="sm" className="md:h-8" onClick={onRegenerate}>
+            <Button variant="secondary" size="sm" className="md:h-8" onClick={regenerate}>
               <RotateCcw className="size-4" /> Regenerate
             </Button>
           </div>
@@ -67,7 +69,7 @@ export const AssistantMessage = memo(function AssistantMessage({
           >
             <AlertCircle className="size-4 shrink-0" />
             <span className="min-w-0 flex-1">{error ?? 'The answer could not be generated.'}</span>
-            <Button variant="secondary" size="sm" className="md:h-8" onClick={onRegenerate}>
+            <Button variant="secondary" size="sm" className="md:h-8" onClick={regenerate}>
               <RotateCcw className="size-4" /> Retry
             </Button>
           </div>
@@ -77,9 +79,9 @@ export const AssistantMessage = memo(function AssistantMessage({
             content={content}
             citedCount={citedCount}
             canRegenerate={isLast}
-            onRegenerate={onRegenerate}
-            onShowSources={onShowSources}
-            onShowTrace={onShowTrace}
+            onRegenerate={regenerate}
+            onShowSources={() => onShowSources(message.id)}
+            onShowTrace={() => onShowTrace(message.id)}
           />
         )}
       </div>

@@ -2,9 +2,25 @@ import { FileSearch, ListTree } from 'lucide-react';
 import { EmptyState } from '@/components/EmptyState';
 import { Button } from '@/components/ui/button';
 import { useActiveAnswer } from '@/features/chat/useActiveAnswer';
+import type { MessageStatus } from '@/features/chat/types';
 import { useOpenCitation } from '@/features/chat/useOpenCitation';
 import { useWorkspace } from '@/features/workspace/workspaceStore';
 import { EvidenceCard } from './EvidenceCard';
+
+const NOTHING_RETRIEVED = {
+  title: 'No passages were retrieved',
+  description: 'This answer did not draw on any report passages.',
+};
+
+const NO_PASSAGES_COPY: Record<MessageStatus, { title: string; description?: string }> = {
+  streaming: { title: 'Searching the records…' },
+  done: NOTHING_RETRIEVED,
+  stopped: NOTHING_RETRIEVED,
+  error: {
+    title: 'No evidence available',
+    description: 'The answer failed before any passages were returned.',
+  },
+};
 
 export function EvidencePanel({ uhid }: { uhid: string }) {
   const active = useActiveAnswer(uhid);
@@ -26,12 +42,12 @@ export function EvidencePanel({ uhid }: { uhid: string }) {
   const others = citations.filter((citation) => !citation.cited);
 
   if (citations.length === 0) {
-    const waiting = active.message.status === 'streaming';
+    const { title, description } = NO_PASSAGES_COPY[active.message.status];
     return (
       <EmptyState
         icon={<FileSearch className="size-5" />}
-        title={waiting ? 'Searching the records…' : 'No passages were retrieved'}
-        description={waiting ? undefined : 'This answer did not draw on any report passages.'}
+        title={title}
+        description={description}
       />
     );
   }

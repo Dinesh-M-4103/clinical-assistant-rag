@@ -35,7 +35,9 @@ export function ReportCard({ report }: { report: Report }) {
           <FileText className="size-5" />
         </span>
         <div className="min-w-0 flex-1">
-          <h3 className="truncate text-sm font-semibold">{report.name}</h3>
+          <h3 className="truncate text-sm font-semibold" title={report.name}>
+            {report.name}
+          </h3>
           <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
             <Badge className={CATEGORY_TONES[report.category]}>
               {CATEGORY_LABELS[report.category]}

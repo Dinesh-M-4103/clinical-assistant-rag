@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pytest
+from chromadb.api.models.Collection import Collection
 
 from app.rag.errors import EmbeddingModelMismatchError
 from app.rag.vectorstore import ChromaVectorStore, collection_name
@@ -98,3 +99,26 @@ def test_opening_a_collection_with_another_embedding_model_raises(tmp_path: Path
 )
 def test_collection_names_always_end_alphanumerically(uhid: str, expected: str) -> None:
     assert collection_name(uhid) == expected
+
+
+def test_deleting_an_unknown_report_never_issues_a_chroma_delete(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A filtered delete that matches nothing intermittently corrupted Chroma's HNSW index."""
+    target = store(tmp_path)
+    add(target, "p1", ("r1:0", "alpha"))
+    deletes: list[object] = []
+    monkeypatch.setattr(Collection, "delete", lambda self, **kwargs: deletes.append(kwargs))
+
+    target.delete_report("p1", "never-ingested")
+
+    assert deletes == []
+
+
+def test_many_reports_can_be_ingested_one_after_another_and_searched(tmp_path: Path) -> None:
+    target = store(tmp_path)
+    for report in range(12):
+        target.delete_report("p1", f"r{report}")
+        add(target, "p1", (f"r{report}:0", f"report number {report} metformin"))
+
+    assert len(search(target, "p1", "metformin", k=20)) == 12

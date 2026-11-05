@@ -1,6 +1,7 @@
 import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
+import { useChatStore } from '@/features/chat/chatStore';
 import { useWorkspace } from '@/features/workspace/workspaceStore';
 import { renderWithProviders } from '@/test/render';
 import { seedAnswer } from '@/test/seed';
@@ -42,5 +43,13 @@ describe('EvidencePanel', () => {
     seedAnswer('MG25001', 'What is the weather?');
     renderWithProviders(<EvidencePanel uhid="MG25001" />);
     expect(screen.getByText('No passages were retrieved')).toBeInTheDocument();
+  });
+
+  it('says so when the answer failed before retrieval finished', () => {
+    const chat = useChatStore.getState();
+    const assistantId = chat.startTurn('MG25001', 'What is the latest HbA1c?');
+    chat.fail('MG25001', assistantId, 'Cannot reach the server.');
+    renderWithProviders(<EvidencePanel uhid="MG25001" />);
+    expect(screen.getByText('No evidence available')).toBeInTheDocument();
   });
 });

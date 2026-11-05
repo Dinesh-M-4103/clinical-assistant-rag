@@ -27,7 +27,9 @@ function PatientRow({ patient, onNavigate }: { patient: Patient; onNavigate?: ()
     >
       <PatientAvatar name={patient.name} />
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-sm font-medium">{patient.name}</span>
+        <span className="block truncate text-sm font-medium" title={patient.name}>
+          {patient.name}
+        </span>
         <span className="block truncate text-xs tabular-nums text-muted">
           {patient.uhid} · {pluralize(patient.report_count, 'report')}
         </span>

@@ -18,6 +18,8 @@ export function useCreatePatient() {
     mutationFn: api.createPatient,
     meta: { silent: true },
     onSuccess: (patient) => {
+      // A deleted patient's cached reports must never show up for a new patient reusing the UHID.
+      queryClient.removeQueries({ queryKey: queryKeys.reports(patient.uhid) });
       queryClient.setQueryData(queryKeys.patient(patient.uhid), patient);
       void queryClient.invalidateQueries({ queryKey: queryKeys.patients, exact: true });
       toast.success(`${patient.name} added`);
@@ -29,8 +31,9 @@ export function useDeletePatient() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: api.deletePatient,
-    onSuccess: (_, uhid) => {
-      queryClient.removeQueries({ queryKey: queryKeys.patient(uhid) });
+    // The patient's queries are left to expire: removing them while the page is still mounted
+    // makes its observers refetch the deleted patient and log a 404.
+    onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: queryKeys.patients, exact: true });
       toast.success('Patient and all their reports deleted');
     },
