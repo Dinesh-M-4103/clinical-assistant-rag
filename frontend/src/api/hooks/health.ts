@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { api } from '../endpoints';
 import { queryKeys } from './keys';
 
-const HEALTHY_POLL_MS = 30_000;
+const HEALTHY_POLL_MS = 10_000;
 const DOWN_POLL_MS = 5_000;
 
 /** Polls `/health`, backing off to a faster cadence while the backend is unreachable. */

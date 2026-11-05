@@ -38,7 +38,9 @@ export function EvidenceCard({ citation, onOpen }: EvidenceCardProps) {
         >
           {citation.id}
         </span>
-        <span className="min-w-0 flex-1 truncate text-sm font-medium">{citation.report_name}</span>
+        <span className="min-w-0 flex-1 truncate text-sm font-medium" title={citation.report_name}>
+          {citation.report_name}
+        </span>
         {citation.cited && <Badge tone="primary">Cited</Badge>}
       </div>
 

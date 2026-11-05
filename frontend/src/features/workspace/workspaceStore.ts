@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { rememberOpener } from '@/lib/focus';
 
 export type InspectorTab = 'evidence' | 'reports' | 'trace';
 
@@ -37,12 +38,27 @@ export const useWorkspace = create<WorkspaceState>((set) => ({
   addPatientOpen: false,
   uploadOpen: false,
   pdf: null,
-  openInspector: (tab) => set({ inspectorTab: tab, inspectorOpen: true }),
+  openInspector: (tab) => {
+    rememberOpener();
+    set({ inspectorTab: tab, inspectorOpen: true });
+  },
   setInspectorTab: (inspectorTab) => set({ inspectorTab }),
   closeInspector: () => set({ inspectorOpen: false }),
-  setPatientDrawerOpen: (patientDrawerOpen) => set({ patientDrawerOpen }),
-  setAddPatientOpen: (addPatientOpen) => set({ addPatientOpen }),
-  setUploadOpen: (uploadOpen) => set({ uploadOpen }),
-  openPdf: (pdf) => set({ pdf }),
+  setPatientDrawerOpen: (patientDrawerOpen) => {
+    if (patientDrawerOpen) rememberOpener();
+    set({ patientDrawerOpen });
+  },
+  setAddPatientOpen: (addPatientOpen) => {
+    if (addPatientOpen) rememberOpener();
+    set({ addPatientOpen });
+  },
+  setUploadOpen: (uploadOpen) => {
+    if (uploadOpen) rememberOpener();
+    set({ uploadOpen });
+  },
+  openPdf: (pdf) => {
+    rememberOpener();
+    set({ pdf });
+  },
   closePdf: () => set({ pdf: null }),
 }));

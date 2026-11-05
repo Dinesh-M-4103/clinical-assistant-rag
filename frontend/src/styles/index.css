@@ -126,12 +126,14 @@
   }
   .markdown table {
     @apply w-full border-collapse text-left text-[13px] tabular-nums;
+    /* Keep cell text whole (the body default would split "mL/min/1.73") and let the wrapper scroll. */
+    overflow-wrap: normal;
   }
   .markdown th {
-    @apply whitespace-nowrap bg-subtle px-3 py-2 font-semibold;
+    @apply min-w-24 whitespace-nowrap bg-subtle px-3 py-2 font-semibold;
   }
   .markdown td {
-    @apply border-t border-border px-3 py-2 align-top;
+    @apply min-w-24 border-t border-border px-3 py-2 align-top;
   }
 }
 

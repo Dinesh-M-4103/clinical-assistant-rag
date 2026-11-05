@@ -26,12 +26,5 @@ export default defineConfig({
       fullyParallel: true,
       use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 } },
     },
-    {
-      name: 'screenshots',
-      testMatch: /screenshots\.spec\.ts/,
-      workers: 1,
-      timeout: 120_000,
-      use: { ...devices['Desktop Chrome'], deviceScaleFactor: 1 },
-    },
   ],
 });

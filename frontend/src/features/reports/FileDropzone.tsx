@@ -63,7 +63,9 @@ export function FileDropzone({
       {file ? (
         <>
           <FileText aria-hidden className="size-6 text-primary-text" />
-          <span className="max-w-full truncate text-sm font-medium">{file.name}</span>
+          <span className="max-w-full truncate text-sm font-medium" title={file.name}>
+            {file.name}
+          </span>
           <span className="text-xs tabular-nums text-muted">
             {formatBytes(file.size)} · click to replace
           </span>
